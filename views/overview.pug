@@ -1,0 +1,49 @@
+extends base
+
+block content
+  main.main
+    .card-container
+    
+      each driver in drivers
+        .card
+          .card__header
+            .card__picture
+              .card__picture-overlay &nbsp;
+              img.card__picture-img(src=`/img/drivers/${driver.photo}`, alt=`${driver.name}`)
+            h3.heading-tertirary
+              span= driver.name
+
+          .card__details
+            //- h4.card__sub-heading= `${driver.difficulty} ${driver.duration}-day driver`
+            //- p.card__text= driver.summary
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-map-pin')
+              span= driver.place
+            //- .card__data
+            //-   svg.card__icon
+            //-     use(xlink:href='/img/icons.svg#icon-calendar')
+            //-   span= driver.startDates[0].toLocaleString('en-us', {month: 'long', year: 'numeric'})
+            //- .card__data
+            //-   svg.card__icon
+            //-     use(xlink:href='/img/icons.svg#icon-flag')
+            //-   span= `${driver.locations.length} stops`
+            //- .card__data
+            //-   svg.card__icon
+            //-     use(xlink:href='/img/icons.svg#icon-user')
+            //-   span= `${driver.maxGroupSize} people`
+
+          .card__footer
+            p
+              span.card__footer-value= `₹${driver.price}`
+              | 
+              span.card__footer-text minimum
+            p  
+              span.card__footer-value= `₹${driver.pricePerKm}`
+              | 
+              span.card__footer-text /km
+            p.card__ratings
+              span.card__footer-value= driver.rating
+              | 
+              span.card__footer-text= `rating (${driver.ratingsQuantity})`
+            a.btn.btn--green.btn--small(href=`/driver/${driver.slug}`) Details
